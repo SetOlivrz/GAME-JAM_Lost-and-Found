@@ -26,7 +26,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        checkPlayerCaught();
     }
 
     private IEnumerator FOVRoutine()
@@ -59,13 +59,14 @@ public class EnemyBehavior : MonoBehaviour
                     agent.SetDestination(player.transform.position);
 
                     Vector3 forward = (player.transform.position - gameObject.transform.position).normalized;
-                    animation.Move(forward, false, false);
+                    animation.Move(forward * 0.5f, false, false);
                     
                 }
                 else
                 {
                     playerInView = false;
                     agent.isStopped = true;
+                    animation.Move(Vector3.zero, false, false);
                 }
             }
 
@@ -78,6 +79,15 @@ public class EnemyBehavior : MonoBehaviour
         }
 
 
+    }
+
+    private void checkPlayerCaught()
+    {
+        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.8f)
+        {
+            Debug.Log("You have been caught");
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_CORRECT_MATCH);
+        }
     }
 }
 
