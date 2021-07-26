@@ -11,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private LayerMask obstructionMask;
-
+    UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter animation;
     public bool playerInView;
 
     NavMeshAgent agent;
@@ -20,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         agent = this.GetComponent<NavMeshAgent>();
         StartCoroutine(FOVRoutine());
+        animation = gameObject.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>();
     }
 
     // Update is called once per frame
@@ -56,6 +57,9 @@ public class EnemyBehavior : MonoBehaviour
                     agent.isStopped = false;
                     playerInView = true;
                     agent.SetDestination(player.transform.position);
+
+                    Vector3 forward = (player.transform.position - gameObject.transform.position).normalized;
+                    animation.Move(forward, false, false);
                     
                 }
                 else
@@ -76,3 +80,4 @@ public class EnemyBehavior : MonoBehaviour
 
     }
 }
+
