@@ -46,6 +46,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
+            if(horizontal != 0.0f || vertical != 0.0f)
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK);
+            }
+
+            else
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
+            }
+
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
             if (direction.magnitude >= 0.1f)
