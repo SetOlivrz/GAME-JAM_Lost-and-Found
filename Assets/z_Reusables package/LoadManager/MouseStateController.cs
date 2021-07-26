@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseStateController : MonoBehaviour
 {
-    [SerializeField] private bool isCursorUnlocked;
+    [SerializeField] private GameObject PausePopUp;
     [SerializeField] private bool isCursorLocked;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class MouseStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt) || PausePopUp.activeInHierarchy)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

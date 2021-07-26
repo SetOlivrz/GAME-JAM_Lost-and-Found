@@ -7,6 +7,7 @@ public class PopUpManager : MonoBehaviour
 {
     [SerializeField] private GameObject CaughtUI;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class PopUpManager : MonoBehaviour
     private void OnDestroy()
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
+
     }
 
     // Update is called once per frame

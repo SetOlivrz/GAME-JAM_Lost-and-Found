@@ -87,6 +87,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             //Debug.Log("You have been caught");
             EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
+           // Time.timeScale = 0; // pause
         }
     }
 }
