@@ -54,7 +54,6 @@ public class EnemyBehavior : MonoBehaviour
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
-                    agent.isStopped = false;
                     playerInView = true;
                     agent.SetDestination(player.transform.position);
 
@@ -65,7 +64,7 @@ public class EnemyBehavior : MonoBehaviour
                 else
                 {
                     playerInView = false;
-                    agent.isStopped = true;
+                    agent.ResetPath();
                     animation.Move(Vector3.zero, false, false);
                 }
             }
