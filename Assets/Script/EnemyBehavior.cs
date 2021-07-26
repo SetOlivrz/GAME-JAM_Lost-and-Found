@@ -59,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
                     agent.SetDestination(player.transform.position);
 
                     Vector3 forward = (player.transform.position - gameObject.transform.position).normalized;
-                    animation.Move(forward, false, false);
+                    animation.Move(forward*0.5f, false, false);
                     
                 }
                 else
