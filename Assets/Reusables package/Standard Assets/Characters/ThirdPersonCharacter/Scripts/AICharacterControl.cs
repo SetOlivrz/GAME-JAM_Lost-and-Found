@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (ThirdPersonCharacter))]
+    [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class AICharacterControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Transform target;                                    // target to aim for
+        private Transform target;                                    // target to aim for
+        public Transform target1, target2;
 
 
         private void Start()
@@ -18,18 +19,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
 
-	        agent.updateRotation = false;
-	        agent.updatePosition = true;
+            agent.updateRotation = false;
+            agent.updatePosition = true;
+
+            if (target1 != null)
+            {
+                target = target1;
+                agent.SetDestination(target.position);
+            }
+
         }
 
 
         private void Update()
         {
-            if (target != null)
+            if (gameObject.transform.position.z == target.position.z && gameObject.transform.position.x == target.position.x)
+            {
+                if (target == target1)
+                    target = target2;
+
+                else if (target == target2)
+                    target = target1;
                 agent.SetDestination(target.position);
+            }
+
 
             if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity, false, false);
+                character.Move(agent.desiredVelocity * 0.5f, false, false);
             else
                 character.Move(Vector3.zero, false, false);
         }
