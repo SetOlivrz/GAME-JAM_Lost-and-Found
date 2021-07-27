@@ -26,7 +26,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 target = target1;
                 agent.SetDestination(target.position);
+                Debug.Log("target set");
             }
+
+            else Debug.Log("No target");
 
         }
 
@@ -40,6 +43,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                 else if (target == target2)
                     target = target1;
+
                 agent.SetDestination(target.position);
             }
 
@@ -51,9 +55,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
 
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform target1, Transform target2)
         {
-            this.target = target;
+            this.target1 = target1;
+            this.target2 = target2;
         }
     }
 }
