@@ -22,7 +22,6 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, this.QuitGame);
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PAUSE_GAME, this.PauseGame);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, this.ResumeGame);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, this.QuitToMenu);
 
