@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -42,19 +43,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-
+            EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, this.terminate);
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            if(horizontal != 0.0f || vertical != 0.0f)
-            {
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK);
-            }
-
-            else
-            {
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
-            }
+            
 
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
@@ -97,12 +90,43 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 #if !MOBILE_INPUT
             // walk speed multiplier
-            if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+            if (h != 0.0f || v != 0.0f)
+            {
+                Parameters parameters = new Parameters();
+
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    m_Move *= 0.5f;
+                    parameters.PutExtra("isWalking", true);
+                }
+
+                else
+                    parameters.PutExtra("isWalking", false);
+
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK, parameters);
+            }
+
+            else
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
+            }
+            
+            
 #endif
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
+
+        private void terminate()
+        {
+            Time.timeScale = 0;
+            //this.enabled = false;
+            //SceneManager.LoadScene("Game Proper");
+        }
     }
+
+
 }
