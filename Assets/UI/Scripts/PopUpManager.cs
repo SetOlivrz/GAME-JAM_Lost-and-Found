@@ -31,7 +31,11 @@ public class PopUpManager : MonoBehaviour
             //Respawn Player
             EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_RESPAWN);
 
-            //Remove Key
+            //Remove Key UI
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
+
+            //Respawn Key
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_SPAWN);
 
             CaughtUI.SetActive(false);
             Debug.Log("Continue Game");
