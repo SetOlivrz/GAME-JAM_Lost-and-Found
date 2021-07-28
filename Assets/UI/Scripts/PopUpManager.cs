@@ -27,7 +27,12 @@ public class PopUpManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Time.timeScale = 1;
+            
+            //Respawn Player
             EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_RESPAWN);
+
+            //Remove Key
+
             CaughtUI.SetActive(false);
             Debug.Log("Continue Game");
         }
