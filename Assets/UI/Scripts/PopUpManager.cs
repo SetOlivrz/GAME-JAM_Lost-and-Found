@@ -6,19 +6,21 @@ using UnityEngine.UI;
 public class PopUpManager : MonoBehaviour
 {
     [SerializeField] private GameObject CaughtUI;
-
+    [SerializeField] private GameObject EscapedUI;
 
     // Start is called before the first frame update
     void Start()
     {
         CaughtUI.SetActive(false);
+        EscapedUI.SetActive(false);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, this.OnCaughtTrigger);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_ESCAPED, this.OnEscapedTrigger);
     }
 
     private void OnDestroy()
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
-
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_ESCAPED);
     }
 
     // Update is called once per frame
@@ -51,5 +53,10 @@ public class PopUpManager : MonoBehaviour
     private void OnCaughtTrigger()
     {
         CaughtUI.SetActive(true);
+    }
+
+    private void OnEscapedTrigger()
+    {
+        EscapedUI.SetActive(true);
     }
 }
