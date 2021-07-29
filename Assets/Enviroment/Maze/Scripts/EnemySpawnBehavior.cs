@@ -6,10 +6,14 @@ public class EnemySpawnBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject patrolHunter;
     [SerializeField] private GameObject followHunter;
-    [SerializeField] private List<GameObject> spawnLocList;
+    [SerializeField] private GameObject player;
 
     [SerializeField]
     int nPatrolHunters, nFollowHunters;
+    
+    [SerializeField] private List<GameObject> spawnLocList;
+
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -49,6 +53,12 @@ public class EnemySpawnBehavior : MonoBehaviour
     }
     void spawnFollowHunters()
     {
-
+        for (int i = 0; i < nFollowHunters; i++)
+        {
+            int spawnerUseIndex = Random.Range(0, spawnLocList.Count);
+            GameObject fHunterObj = GameObject.Instantiate(followHunter, spawnLocList[spawnerUseIndex].transform.GetChild(0).transform.position, Quaternion.identity, null);
+            fHunterObj.GetComponent<EnemyBehavior>().setTarget(player);
+            spawnLocList.RemoveAt(spawnerUseIndex);
+        }
     }
 }
