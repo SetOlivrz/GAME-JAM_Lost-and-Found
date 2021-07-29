@@ -18,9 +18,8 @@ public class ButtonFunctions : MonoBehaviour
     {
         color = new Color(0.4f, 0.4f, 0.4f);
         PausedUI.SetActive(false);
-        LostKey();
 
-        EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
+        //EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, this.StartGame);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, this.OptionsMenu);

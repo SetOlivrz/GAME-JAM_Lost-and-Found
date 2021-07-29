@@ -66,8 +66,12 @@ public class SFXManager : MonoBehaviour
 
     private void stopWalkingSound()
     {
-        if (audioSourceSFX.clip == walkingSound || audioSourceSFX.clip == runningSound)
-            audioSourceSFX.Stop();
+        if (audioSourceSFX != null)
+        {
+            if (audioSourceSFX.clip == walkingSound || audioSourceSFX.clip == runningSound)
+                audioSourceSFX.Stop();
+        }
+        
     }
 
     private void playButtonSound()
