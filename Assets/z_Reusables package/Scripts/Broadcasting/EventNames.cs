@@ -22,6 +22,7 @@ public class EventNames
 	public const string ON_PLAYER_RESPAWN = "ON_PLAYER_RESPAWN";
 	public const string ON_PLAYER_ESCAPED = "ON_PLAYER_ESCAPED";
 
+	public const string ON_KEY_GET = "ON_KEY_GET";
 	public const string ON_KEY_LOST = "ON_KEY_LOST";
 	public const string ON_KEY_SPAWN = "ON_KEY_SPAWN";
 }

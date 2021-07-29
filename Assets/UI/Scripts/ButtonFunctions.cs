@@ -8,11 +8,16 @@ using UnityEngine.UI;
 public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] private GameObject PausedUI;
+    [SerializeField] private GameObject KeyUI;
+    Color color;
 
     // Start is called before the first frame update
     void Start()
     {
+        color = new Color(0.2f, 0.2f, 0.2f);
         PausedUI.SetActive(false);
+
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
 
         //  OptionsPopUp.SetActive(false);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, this.StartGame);
@@ -26,7 +31,8 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, this.ResumeGame);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, this.QuitToMenu);
 
-
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_GET, this.HasKey);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_LOST, this.LostKey);
 
     }
 
@@ -38,7 +44,8 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PAUSE_GAME);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_RESUME_GAME);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_TO_MENU);
-
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_GET);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_LOST);
 
 
 
@@ -49,7 +56,7 @@ public class ButtonFunctions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartGame()
@@ -84,5 +91,16 @@ public class ButtonFunctions : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void HasKey()
+    {
+        Debug.Log("Has Key");
+        KeyUI.GetComponent<Image>().color = Color.white;
+    }
+
+    public void LostKey()
+    {
+        KeyUI.GetComponent<Image>().color = color;
+        Debug.Log("Lost Key");
+    }
 }
 
