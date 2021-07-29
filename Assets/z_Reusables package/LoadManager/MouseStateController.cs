@@ -21,16 +21,25 @@ public class MouseStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) || PauseScreen.activeInHierarchy || OptionsScreen.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            Cursor.visible = !Cursor.visible;
+
+            if (Cursor.visible)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+        
+        if ( PauseScreen.activeInHierarchy || OptionsScreen.activeInHierarchy)
         {
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = !Cursor.visible;
+            Cursor.visible = true;
         }
-        //else if (Input.GetKeyUp(KeyCode.LeftAlt))
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //    Cursor.visible = false;
-        //}
 
     }
 }
