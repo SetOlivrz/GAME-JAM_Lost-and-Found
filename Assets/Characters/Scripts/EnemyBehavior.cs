@@ -83,7 +83,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void checkPlayerCaught()
     {
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.8f)
+        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.6f)
         {
             //Debug.Log("You have been caught");
             EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);

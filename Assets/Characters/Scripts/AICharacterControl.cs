@@ -52,6 +52,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 character.Move(agent.desiredVelocity * 0.5f, false, false);
             else
                 character.Move(Vector3.zero, false, false);
+
         }
 
 
@@ -59,6 +60,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             this.target1 = target1;
             this.target2 = target2;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            GameObject collideObj;
+            collideObj = collision.gameObject;
+            while(collideObj.transform.parent != null)
+            {
+                collideObj = collideObj.transform.parent.gameObject;
+            }
+
+            if(collideObj.name == "Player")
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
+            }
         }
     }
 }
