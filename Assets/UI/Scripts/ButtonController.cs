@@ -36,6 +36,14 @@ public class ButtonController : MonoBehaviour
         EventBroadcaster.Instance.PostEvent(EventNames.ON_RESUME_GAME);
     }
 
+    public void GameOptions()
+    {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_OPTIONS_MENU);
+    }
+
+
+
+
     public void QuitToMenu()
     {
         EventBroadcaster.Instance.PostEvent(EventNames.ON_QUIT_TO_MENU);

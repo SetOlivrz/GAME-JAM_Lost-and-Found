@@ -53,12 +53,6 @@ public class EnemySpawnBehavior : MonoBehaviour
     }
     void spawnFollowHunters()
     {
-        for (int i = 0; i < nFollowHunters; i++)
-        {
-            int spawnerUseIndex = Random.Range(0, spawnLocList.Count);
-            GameObject fHunterObj = GameObject.Instantiate(followHunter, spawnLocList[spawnerUseIndex].transform.GetChild(0).transform.position, Quaternion.identity, null);
-            fHunterObj.GetComponent<EnemyBehavior>().setTarget(player);
-            spawnLocList.RemoveAt(spawnerUseIndex);
-        }
+       
     }
 }

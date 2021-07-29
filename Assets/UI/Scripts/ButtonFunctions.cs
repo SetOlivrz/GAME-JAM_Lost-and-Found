@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] private GameObject PausedUI;
+    [SerializeField] private GameObject OptionsUI;
+
     [SerializeField] private GameObject KeyUI;
     Color color;
 
@@ -21,16 +23,11 @@ public class ButtonFunctions : MonoBehaviour
 
         //  OptionsPopUp.SetActive(false);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, this.StartGame);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, this.OptionsMenu);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, this.QuitGame);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PAUSE_GAME, this.PauseGame);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, this.ResumeGame);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, this.QuitToMenu);
-
         EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_GET, this.HasKey);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_LOST, this.LostKey);
 
@@ -46,11 +43,6 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_TO_MENU);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_GET);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_LOST);
-
-
-
-
-
     }
 
     // Update is called once per frame
@@ -59,45 +51,47 @@ public class ButtonFunctions : MonoBehaviour
 
     }
 
-    public void StartGame()
+    private void StartGame()
     {
         SceneManager.LoadScene(sceneName:"Game Proper");
     }
-    public void OptionsMenu()
+    private void OptionsMenu()
     {
-   //     OptionsPopUp.SetActive(true);
+        PausedUI.SetActive(false);
+        OptionsUI.SetActive(true);
     }
-    public void QuitGame()
+    private void QuitGame()
     {
         Application.Quit();
     }
 
-    public void QuitToMenu()
+    private void QuitToMenu()
     {
-        //PausedUI.SetActive(false);
+        PausedUI.SetActive(false);
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneName: "Game Menu");
     }
 
-    public void PauseGame()
+    private void PauseGame()
     {
+        OptionsUI.SetActive(false);
         PausedUI.SetActive(true);
         Time.timeScale = 0;
     }
 
-    public void ResumeGame()
+    private void ResumeGame()
     {
         PausedUI.SetActive(false);
         Time.timeScale = 1;
     }
 
-    public void HasKey()
+    private void HasKey()
     {
         Debug.Log("Has Key");
         KeyUI.GetComponent<Image>().color = Color.white;
     }
 
-    public void LostKey()
+    private void LostKey()
     {
         KeyUI.GetComponent<Image>().color = color;
         Debug.Log("Lost Key");

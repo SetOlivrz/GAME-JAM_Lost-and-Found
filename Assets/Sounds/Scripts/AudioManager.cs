@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void CheckSFXToggle()
+    public void checkSFXToggle()
     {
         if (sfxToggle.isOn == false)
         {
@@ -61,11 +61,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void checkMusicToggle()
+    public void checkBGMToggle()
     {
-        if (sfxToggle.isOn == false)
+        if (bgmToggle.isOn == false)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_BGM);
+        }
+        else
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAY_BGM);
+
         }
 
         for (int i = 0; i < bgmList.Length; i++)
@@ -77,6 +82,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
+
                 bgmList[i].enabled = false;
                 bgmList[i].gameObject.GetComponent<AudioSource>().mute = true;
             }
