@@ -12,7 +12,8 @@ public class BGMManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSourceBGM = this.gameObject.GetComponent<AudioSource>();
+        audioSourceBGM.clip = BGM;
+
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAY_BGM, playBGM);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_BGM, stopBGM);
     }
@@ -34,7 +35,6 @@ public class BGMManager : MonoBehaviour
 
     private void playBGM()
     {
-        audioSourceBGM.clip = BGM;
         audioSourceBGM.Play();
         Debug.Log("played func");
 
@@ -42,9 +42,6 @@ public class BGMManager : MonoBehaviour
 
     private void stopBGM()
     {
-        if (audioSourceBGM.isPlaying)
-        {
             audioSourceBGM.Stop();
-        };
     }
 }

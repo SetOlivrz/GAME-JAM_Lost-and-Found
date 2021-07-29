@@ -25,6 +25,12 @@ public class EventNames
 	public const string ON_KEY_GET = "ON_KEY_GET";
 	public const string ON_KEY_LOST = "ON_KEY_LOST";
 	public const string ON_KEY_SPAWN = "ON_KEY_SPAWN";
+
+	public const string ON_PLAY_BGM = "ON_PLAY_BGM";
+
+	public const string ON_STOP_ALL_BGM = "ON_STOP_ALL_BGM";
+	public const string ON_STOP_ALL_SOUNDS = "ON_STOP_ALL_SOUNDS";
+
 }
 
 
