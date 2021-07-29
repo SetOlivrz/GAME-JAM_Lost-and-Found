@@ -7,6 +7,7 @@ public class PopUpManager : MonoBehaviour
 {
     [SerializeField] private GameObject CaughtUI;
     [SerializeField] private GameObject EscapedUI;
+    //[SerializeField] private GameObject KeyUI;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class PopUpManager : MonoBehaviour
             EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
 
             //Respawn Key
-            EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_SPAWN);
+            //EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_SPAWN);
 
             CaughtUI.SetActive(false);
             Debug.Log("Continue Game");
