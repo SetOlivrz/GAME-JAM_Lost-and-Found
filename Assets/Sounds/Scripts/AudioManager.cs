@@ -1,69 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioClip walkingSound;
-    [SerializeField] AudioClip runningSound;
-    [SerializeField] AudioClip buttonSound;
 
-    private AudioSource audioSource;
+    [SerializeField] private Toggle sfxToggle;
+    [SerializeField] private Toggle bgmToggle;
+
+    SFXManager[] sfxList;
+    BGMManager[] bgmList;
+
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = this.gameObject.GetComponent<AudioSource>();
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK, playWalkingSound);
-        
+        sfxList = FindObjectsOfType(typeof(SFXManager)) as SFXManager[];
+        for (int i = 0; i < sfxList.Length; i++)
+        {
+            Debug.Log(sfxList.Length);
+        }
 
-        //ui button clicks
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PAUSE_GAME, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, playButtonSound);
 
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP, stopWalkingSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
+        bgmList = FindObjectsOfType(typeof(BGMManager)) as BGMManager[];
+        for (int i = 0; i < bgmList.Length; i++)
+        {
+            Debug.Log(bgmList.Length);
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+      
     }
 
-    private void OnDestroy()
-    {
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_STOP);
-    }
-    private void playWalkingSound(Parameters parameters)
-    {
-        bool isWalking = parameters.GetBoolExtra("isWalking", false);
 
-        if (isWalking)
-            audioSource.clip = walkingSound;
+    public void CheckSFXToggle()
+    {
+        if (sfxToggle.isOn == false)
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_SOUNDS);
+        }
 
-        else
-            audioSource.clip = runningSound;
-        if (!audioSource.isPlaying)
-            audioSource.Play();
+        for (int i = 0; i < sfxList.Length; i++)
+        {
+            if (sfxToggle.isOn)
+            {
+                sfxList[i].enabled = true;
+                sfxList[i].gameObject.GetComponent<AudioSource>().mute = false;
+            }
+            else
+            {
+                sfxList[i].enabled = false;
+                sfxList[i].gameObject.GetComponent<AudioSource>().mute = true;
+            }
+        }
     }
 
-    private void stopWalkingSound()
+    public void checkMusicToggle()
     {
-        if (audioSource.clip == walkingSound || audioSource.clip == runningSound)
-            audioSource.Stop();
-    }
+        if (sfxToggle.isOn == false)
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_BGM);
+        }
 
-    private void playButtonSound()
-    {
-        audioSource.PlayOneShot(buttonSound);
-    }
-    
-    private void stopAllSounds()
-    {
-        audioSource.Stop();
+        for (int i = 0; i < bgmList.Length; i++)
+        {
+            if (bgmToggle.isOn)
+            {
+                bgmList[i].enabled = true;
+                bgmList[i].gameObject.GetComponent<AudioSource>().mute = false;
+            }
+            else
+            {
+                bgmList[i].enabled = false;
+                bgmList[i].gameObject.GetComponent<AudioSource>().mute = true;
+            }
+        }
     }
 }
