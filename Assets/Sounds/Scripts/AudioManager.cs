@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     {
         audioSource = this.gameObject.GetComponent<AudioSource>();
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK, playWalkingSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP, stopWalkingSound);
+        
 
         //ui button clicks
         EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, playButtonSound);
@@ -22,6 +22,9 @@ public class AudioManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, playButtonSound);
+
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP, stopWalkingSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
     }
 
     // Update is called once per frame
