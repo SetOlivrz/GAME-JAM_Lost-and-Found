@@ -67,8 +67,8 @@ public class ButtonFunctions : MonoBehaviour
 
     private void QuitToMenu()
     {
-        PausedUI.SetActive(false);
         Time.timeScale = 1;
+
         SceneManager.LoadScene(sceneName: "Game Menu");
     }
 

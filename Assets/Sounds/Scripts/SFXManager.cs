@@ -22,6 +22,8 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, playButtonSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, playButtonSound);
+
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP, stopWalkingSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
@@ -46,6 +48,8 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_RESUME_GAME);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_TO_MENU);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_GAME);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_START_GAME);
+
     }
     private void playWalkingSound(Parameters parameters)
     {
@@ -73,6 +77,11 @@ public class SFXManager : MonoBehaviour
     
     private void stopAllSounds()
     {
-        audioSourceSFX.Stop();
+        if (audioSourceSFX != null)
+        {
+            if (audioSourceSFX.isPlaying)
+                audioSourceSFX.Stop();
+        }
+        
     }
 }
