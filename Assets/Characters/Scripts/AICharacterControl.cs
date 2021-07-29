@@ -11,10 +11,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         private Transform target;                                    // target to aim for
         public Transform target1, target2;
+        private GameObject player;
+        private bool playerCaught;
+        private float playerCaughtDuration = 2.5f;
+        private float playerCaughtTimer = 0.0f;
 
 
         private void Start()
         {
+
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
@@ -36,23 +41,49 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (gameObject.transform.position.z == target.position.z && gameObject.transform.position.x == target.position.x)
+            if(playerCaught == false)
             {
-                if (target == target1)
-                    target = target2;
+                if (gameObject.transform.position.z == target.position.z && gameObject.transform.position.x == target.position.x)
+                {
+                    if (target == target1)
+                        target = target2;
 
-                else if (target == target2)
-                    target = target1;
+                    else if (target == target2)
+                        target = target1;
 
-                agent.SetDestination(target.position);
+                    agent.SetDestination(target.position);
+                }
+
+
+                if (agent.remainingDistance > agent.stoppingDistance)
+                    character.Move(agent.desiredVelocity * 0.5f, false, false);
+                else
+                    character.Move(Vector3.zero, false, false);
             }
-
-
-            if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity * 0.5f, false, false);
+            
             else
-                character.Move(Vector3.zero, false, false);
+            {
+                player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
+                
+                gameObject.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
+                
+                
+                
+                playerCaughtTimer += Time.deltaTime;
+                if(playerCaughtTimer >= playerCaughtDuration)
+                {
+                    playerCaughtTimer = 0.0f;
+                    playerCaught = false;
+                    player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().enabled = true;
+                    player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = true;
+                    player = null;
 
+                    target = target1;
+                    agent.SetDestination(target.position);
+                    EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
+                    this.GetComponent<Collider>().enabled = true;
+                }
+            }
         }
 
 
@@ -73,8 +104,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if(collideObj.name == "Player")
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
+                gameObject.GetComponent<Collider>().enabled = false;
+                player = collideObj;
+
+                player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = false;
+                player.transform.LookAt(new Vector3(gameObject.transform.position.x, player.transform.position.y, gameObject.transform.position.z));
+                //player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = false;
+                playerCaught = true;
+                agent.ResetPath();
+                gameObject.transform.LookAt(new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z));
             }
         }
+
+
+
     }
 }
