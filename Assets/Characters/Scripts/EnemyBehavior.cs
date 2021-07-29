@@ -13,6 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private LayerMask obstructionMask;
     UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter animation;
     public bool playerInView;
+    private bool playerCaught = false;
 
     NavMeshAgent agent;
     // Start is called before the first frame update
@@ -26,7 +27,16 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkPlayerCaught();
+        if (playerCaught == false)
+            checkPlayerCaught();
+
+        else
+        {
+            player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
+            gameObject.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
+            gameObject.transform.LookAt(new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z));
+            agent.ResetPath();
+        }
     }
 
     private IEnumerator FOVRoutine()
@@ -59,9 +69,9 @@ public class EnemyBehavior : MonoBehaviour
                     agent.SetDestination(player.transform.position);
 
                     Vector3 forward = (player.transform.position - gameObject.transform.position).normalized;
-                    animation.Move(forward*0.5f, false, false);
-                    
+                    animation.Move(forward * 0.5f, false, false);
                 }
+
                 else
                 {
                     playerInView = false;
@@ -83,12 +93,40 @@ public class EnemyBehavior : MonoBehaviour
 
     private void checkPlayerCaught()
     {
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.6f)
+        if (player != null)
         {
-            //Debug.Log("You have been caught");
-            EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
-           // Time.timeScale = 0; // pause
+            if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.6f)
+            {
+                //Debug.Log("You have been caught");
+                Vector3 NPCdirection = this.transform.position;
+                NPCdirection.y = player.transform.position.y;
+                player.transform.LookAt(NPCdirection);
+                StartCoroutine(reportPlayerCaught(2.5f));
+                // Time.timeScale = 0; // pause
+                playerCaught = true;
+
+                player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = false;
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
+                agent.ResetPath();
+                StopCoroutine(FOVRoutine());
+            }
         }
+
+    }
+
+    private IEnumerator reportPlayerCaught(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_CAUGHT);
+        playerCaught = false;
+        player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().enabled = true;
+        player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = true;
+        StartCoroutine(FOVRoutine());
+        agent.ResetPath();
+    }
+    public void setTarget(GameObject target)
+    {
+        player = target;
     }
 }
 
