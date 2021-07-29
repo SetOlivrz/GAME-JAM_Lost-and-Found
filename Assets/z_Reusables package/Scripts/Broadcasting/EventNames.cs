@@ -19,6 +19,13 @@ public class EventNames
 	public const string ON_PLAYER_CAUGHT = "ON_PLAYER_CAUGHT";
 	public const string ON_PLAYER_WALK = "ON_PLAYER_WALK";
 	public const string ON_PLAYER_WALK_STOP = "ON_PLAYER_WALK_STOP";
+
+	public const string ON_PLAY_BGM = "ON_PLAY_BGM";
+	public const string ON_STOP_ALL_BGM = "ON_STOP_ALL_BGM";
+
+	public const string ON_STOP_ALL_SOUNDS = "ON_STOP_ALL_SOUNDS";
+
+
 	public const string ON_PLAYER_RESPAWN = "ON_PLAYER_RESPAWN";
 	public const string ON_PLAYER_ESCAPED = "ON_PLAYER_ESCAPED";
 

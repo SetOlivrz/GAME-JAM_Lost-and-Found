@@ -40,7 +40,10 @@ public class ButtonController : MonoBehaviour
     {
         EventBroadcaster.Instance.PostEvent(EventNames.ON_QUIT_TO_MENU);
     }
-
+     public void GameOptions()
+    {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_OPTIONS_MENU);
+    }
 
 
 }
