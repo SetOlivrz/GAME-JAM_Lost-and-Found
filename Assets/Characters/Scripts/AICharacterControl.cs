@@ -7,7 +7,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class AICharacterControl : MonoBehaviour
     {
-        public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
+        public UnityEngine.AI.NavMeshAgent agent { get; private set; }// the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         private Transform target;                                    // target to aim for
         public Transform target1, target2;
@@ -19,7 +19,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Start()
         {
-
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
@@ -33,9 +32,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 agent.SetDestination(target.position);
                 Debug.Log("target set");
             }
-
             else Debug.Log("No target");
-
         }
 
 
@@ -53,23 +50,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                     agent.SetDestination(target.position);
                 }
-
-
                 if (agent.remainingDistance > agent.stoppingDistance)
+                {
                     character.Move(agent.desiredVelocity * 0.5f, false, false);
+                }
                 else
+                {
                     character.Move(Vector3.zero, false, false);
+                }
             }
-            
             else
             {
                 player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
-                
                 gameObject.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Move(Vector3.zero, false, false);
-                
-                
-                
                 playerCaughtTimer += Time.deltaTime;
+
                 if(playerCaughtTimer >= playerCaughtDuration)
                 {
                     playerCaughtTimer = 0.0f;
