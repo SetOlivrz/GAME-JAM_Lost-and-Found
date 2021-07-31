@@ -8,11 +8,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         EventBroadcaster.Instance.PostEvent(EventNames.ON_KEY_LOST);
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_SPAWN_HUNTERS);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_UPDATE_CURSOR_STATE);
     }
 }

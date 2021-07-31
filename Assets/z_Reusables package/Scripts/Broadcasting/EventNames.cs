@@ -18,7 +18,6 @@ public class EventNames
 	//Pop up + Game behavior
 	public const string ON_PLAYER_CAUGHT = "ON_PLAYER_CAUGHT";
 	public const string ON_PLAYER_ESCAPED = "ON_PLAYER_ESCAPED";
-
 	public const string ON_PLAYER_RESPAWN = "ON_PLAYER_RESPAWN";
 
 	// UI functionality
@@ -34,6 +33,12 @@ public class EventNames
 	// BGM
 	public const string ON_PLAY_BGM = "ON_PLAY_BGM";
 	public const string ON_STOP_ALL_BGM = "ON_STOP_ALL_BGM";
+
+	//
+	public const string ON_SPAWN_HUNTERS = "ON_SPAWN_HUNTERS";
+
+
+	public const string ON_UPDATE_CURSOR_STATE = "ON_UPDATE_CURSOR_STATE";
 
 }
 

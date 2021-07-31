@@ -14,12 +14,24 @@ public class MouseStateController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_CURSOR_STATE, UpdateCursorState);
     }
 
-    
+    private void OnDestroy()
+    {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_UPDATE_CURSOR_STATE);
+    }
+
 
     // Update is called once per frame
     void Update()
+    {
+        
+
+    }
+
+    private void UpdateCursorState()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
@@ -34,12 +46,11 @@ public class MouseStateController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-        
-        if ( PauseScreen.activeInHierarchy || OptionsScreen.activeInHierarchy)
+
+        if (PauseScreen.activeInHierarchy || OptionsScreen.activeInHierarchy)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-
     }
 }
