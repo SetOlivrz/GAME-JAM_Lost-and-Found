@@ -29,7 +29,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
-
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
@@ -157,7 +156,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			// apply extra gravity from multiplier:
 			Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
-			m_Rigidbody.AddForce(extraGravityForce);
+
+
+			m_Rigidbody.AddForce(extraGravityForce + gameObject.transform.forward.normalized * m_Rigidbody.velocity.magnitude);
 
 			m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
 		}
