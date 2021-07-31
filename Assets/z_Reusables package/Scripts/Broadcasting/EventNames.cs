@@ -14,6 +14,8 @@ public class EventNames
 	public const string ON_PAUSE_GAME = "ON_PAUSE_GAME";
 	public const string ON_RESUME_GAME = "ON_RESUME_GAME";
 	public const string ON_QUIT_TO_MENU = "ON_QUIT_TO_MENU";
+	public const string ON_OPEN_HELP = "ON_OPEN_HELP";
+	public const string ON_CLOSE_HELP = "ON_CLOSE_HELP";
 
 	//Pop up + Game behavior
 	public const string ON_PLAYER_CAUGHT = "ON_PLAYER_CAUGHT";

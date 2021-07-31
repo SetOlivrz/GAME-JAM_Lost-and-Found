@@ -53,6 +53,14 @@ public class ButtonManager : MonoBehaviour
         EventBroadcaster.Instance.PostEvent(EventNames.ON_QUIT_TO_MENU);
     }
 
+    public void OpenHelp()
+    {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_OPEN_HELP);
+    }
 
+    public void CloseHelp()
+    {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_CLOSE_HELP);
+    }
 
 }
