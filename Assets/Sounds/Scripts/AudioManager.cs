@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
 
     public void checkSFXToggle()
     {
+
         if (sfxToggle.isOn == false)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_SFX);
@@ -63,6 +64,7 @@ public class AudioManager : MonoBehaviour
 
     public void checkBGMToggle()
     {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAY_BUTTON_SFX);
         if (bgmToggle.isOn == false)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_BGM);
