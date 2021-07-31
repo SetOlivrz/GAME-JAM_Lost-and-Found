@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   FOVradius: 5
-  FOVangle: 130
+  FOVangle: 180
   targetMask:
     serializedVersion: 2
     m_Bits: 128
