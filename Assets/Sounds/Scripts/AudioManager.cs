@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxToggle.isOn == false)
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_SOUNDS);
+            EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_SFX);
         }
 
         for (int i = 0; i < sfxList.Length; i++)
