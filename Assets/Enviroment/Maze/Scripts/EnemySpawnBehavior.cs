@@ -17,16 +17,21 @@ public class EnemySpawnBehavior : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        spawnHunters();
+        //spawnHunters();
+
     }
     void Start()
     {
         
-        //EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, this.spawnHunters);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_HUNTERS, this.spawnHunters);
         //nPatrolHunters = 10;
         //nFollowHunters = 3;
     }
 
+    private void OnDestroy()
+    {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_SPAWN_HUNTERS);
+    }
     // Update is called once per frame
     void Update()
     {

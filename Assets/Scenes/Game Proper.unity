@@ -397,8 +397,8 @@ MonoBehaviour:
   patrolHunter: {fileID: 1360024604717404136, guid: 82ef7fa4eda807046a3b37448194c093, type: 3}
   followHunter: {fileID: 413561563037762804, guid: 0d84428857588474796a37ad8b766f44, type: 3}
   player: {fileID: 1891973453}
-  nPatrolHunters: 0
-  nFollowHunters: 7
+  nPatrolHunters: 7
+  nFollowHunters: 0
   spawnLocList:
   - {fileID: 2827432773730479640}
   - {fileID: 639591436}
@@ -5054,11 +5054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391040435783, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.y
-      value: -0.4636759
+      value: 0.6054752
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391040435783, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.048171
+      value: -1.470954
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391359317372, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_Follow
@@ -5098,11 +5098,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391590412191, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -4.1808263e-24
+      value: 0.000000011236487
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391590412191, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.0171504e-24
+      value: -0.0000000018234311
       objectReference: {fileID: 0}
     - target: {fileID: 3072042391744224315, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5134,19 +5134,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072042392003712483, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.y
-      value: -0.4636759
+      value: 0.6054752
       objectReference: {fileID: 0}
     - target: {fileID: 3072042392003712483, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.048171
+      value: -1.470954
       objectReference: {fileID: 0}
     - target: {fileID: 3072042392019683338, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.y
-      value: -0.4636759
+      value: 0.6054752
       objectReference: {fileID: 0}
     - target: {fileID: 3072042392019683338, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.048171
+      value: -1.470954
       objectReference: {fileID: 0}
     - target: {fileID: 3072042392116942106, guid: d2e64da7d42afb040bfed1997df2d5a1, type: 3}
       propertyPath: m_CullingMask.m_Bits
