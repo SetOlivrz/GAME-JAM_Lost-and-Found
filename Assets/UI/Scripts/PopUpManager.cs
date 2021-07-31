@@ -7,7 +7,8 @@ public class PopUpManager : MonoBehaviour
 {
     [SerializeField] private GameObject CaughtUI;
     [SerializeField] private GameObject EscapedUI;
-    //[SerializeField] private GameObject KeyUI;
+
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class PopUpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && gameOver)
         {
             Time.timeScale = 1;
             
@@ -44,7 +45,7 @@ public class PopUpManager : MonoBehaviour
             Debug.Log("Continue Game");
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && gameOver)
         {
             Debug.Log("Exit Game");
             Application.Quit();
@@ -54,10 +55,12 @@ public class PopUpManager : MonoBehaviour
     private void OnCaughtTrigger()
     {
         CaughtUI.SetActive(true);
+        gameOver = true;
     }
 
     private void OnEscapedTrigger()
     {
         EscapedUI.SetActive(true);
+        gameOver = true;
     }
 }

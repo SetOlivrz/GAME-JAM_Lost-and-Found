@@ -9,6 +9,7 @@ public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] private GameObject PausedUI;
     [SerializeField] private GameObject OptionsUI;
+    [SerializeField] private GameObject HelpUI;
 
     [SerializeField] private GameObject KeyUI;
     Color color;
@@ -29,7 +30,8 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, this.QuitToMenu);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_GET, this.HasKey);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_LOST, this.LostKey);
-
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_OPEN_HELP, this.OpenHelp);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_CLOSE_HELP, this.CloseHelp);
     }
 
     private void OnDestroy()
@@ -42,6 +44,8 @@ public class ButtonFunctions : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_TO_MENU);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_GET);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_LOST);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_OPEN_HELP);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_CLOSE_HELP);
     }
 
     // Update is called once per frame
@@ -94,6 +98,16 @@ public class ButtonFunctions : MonoBehaviour
     {
         KeyUI.GetComponent<Image>().color = color;
         Debug.Log("Lost Key");
+    }
+
+    private void OpenHelp()
+    {
+        HelpUI.SetActive(true);
+    }
+
+    private void CloseHelp()
+    {
+        HelpUI.SetActive(false);
     }
 }
 
