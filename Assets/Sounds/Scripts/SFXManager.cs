@@ -13,7 +13,7 @@ public class SFXManager : MonoBehaviour
     void Start()
     {
         audioSourceSFX = this.gameObject.GetComponent<AudioSource>();
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK, playWalkingSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_SFX, playWalkingSound);
         
 
         //ui button clicks
@@ -25,10 +25,10 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, playButtonSound);
 
 
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP, stopWalkingSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP_SFX, stopWalkingSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
 
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_SOUNDS, stopAllSounds);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_SFX, stopAllSounds);
 
     }
 
@@ -40,8 +40,8 @@ public class SFXManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_STOP);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_SFX);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_STOP_SFX);
 
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_OPTIONS_MENU);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PAUSE_GAME);

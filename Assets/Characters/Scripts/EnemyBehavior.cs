@@ -106,7 +106,7 @@ public class EnemyBehavior : MonoBehaviour
                 playerCaught = true;
 
                 player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = false;
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP_SFX);
                 agent.ResetPath();
                 StopCoroutine(FOVRoutine());
             }

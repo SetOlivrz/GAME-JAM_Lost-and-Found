@@ -104,12 +104,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 else
                     parameters.PutExtra("isWalking", false);
 
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK, parameters);
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_SFX, parameters);
             }
 
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP);
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP_SFX);
             }
             
             
