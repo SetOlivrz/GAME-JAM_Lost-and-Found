@@ -14,8 +14,11 @@ public class EventNames
 	public const string ON_PAUSE_GAME = "ON_PAUSE_GAME";
 	public const string ON_RESUME_GAME = "ON_RESUME_GAME";
 	public const string ON_QUIT_TO_MENU = "ON_QUIT_TO_MENU";
+<<<<<<< HEAD
 	public const string ON_OPEN_HELP = "ON_OPEN_HELP";
 	public const string ON_CLOSE_HELP = "ON_CLOSE_HELP";
+=======
+>>>>>>> parent of f14f1fc (Delete EventNames.cs)
 
 	//Pop up + Game behavior
 	public const string ON_PLAYER_CAUGHT = "ON_PLAYER_CAUGHT";
@@ -30,10 +33,15 @@ public class EventNames
 	// SFX
 	public const string ON_PLAYER_WALK_SFX = "ON_PLAYER_WALK_SFX";
 	public const string ON_PLAYER_WALK_STOP_SFX = "ON_PLAYER_WALK_STOP_SFX";
+<<<<<<< HEAD
 
 	public const string ON_PLAY_BUTTON_SFX = "ON_PLAY_BUTTON_SFX";
 
 
+=======
+	public const string ON_PLAYER_JUMP_START_SFX = "ON_PLAYER_JUMP_START_SFX";
+	public const string ON_PLAYER_JUMP_END_SFX = "ON_PLAYER_JUMP_END_SFX";
+>>>>>>> parent of f14f1fc (Delete EventNames.cs)
 	public const string ON_STOP_ALL_SFX = "ON_STOP_ALL_SFX";
 
 	// BGM
