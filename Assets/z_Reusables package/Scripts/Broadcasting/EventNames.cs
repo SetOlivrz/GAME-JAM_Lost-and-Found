@@ -28,6 +28,8 @@ public class EventNames
 	// SFX
 	public const string ON_PLAYER_WALK_SFX = "ON_PLAYER_WALK_SFX";
 	public const string ON_PLAYER_WALK_STOP_SFX = "ON_PLAYER_WALK_STOP_SFX";
+	public const string ON_PLAYER_JUMP_START_SFX = "ON_PLAYER_JUMP_START_SFX";
+	public const string ON_PLAYER_JUMP_END_SFX = "ON_PLAYER_JUMP_END_SFX";
 	public const string ON_STOP_ALL_SFX = "ON_STOP_ALL_SFX";
 
 	// BGM

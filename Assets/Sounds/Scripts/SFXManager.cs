@@ -7,14 +7,21 @@ public class SFXManager : MonoBehaviour
     [SerializeField] AudioClip walkingSound;
     [SerializeField] AudioClip runningSound;
     [SerializeField] AudioClip buttonSound;
+    [SerializeField] AudioClip jumpStartSound;
+    [SerializeField] AudioClip jumpEndSound;
+    [SerializeField] AudioClip caughtSound;
 
     [SerializeField] private AudioSource audioSourceSFX;
     // Start is called before the first frame update
     void Start()
     {
         audioSourceSFX = this.gameObject.GetComponent<AudioSource>();
+
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_SFX, playWalkingSound);
-        
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_START_SFX, playJumpStartSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_END_SFX, playJumpEndSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, playCaughtSound);
+
 
         //ui button clicks
         EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, playButtonSound);
@@ -29,6 +36,8 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_SFX, stopAllSounds);
+
+
 
     }
 
@@ -62,16 +71,47 @@ public class SFXManager : MonoBehaviour
             audioSourceSFX.clip = runningSound;
         if (!audioSourceSFX.isPlaying)
             audioSourceSFX.Play();
+
+        //Debug.Log("play walking sound");
     }
 
     private void stopWalkingSound()
     {
         if (audioSourceSFX != null)
         {
-            if (audioSourceSFX.clip == walkingSound || audioSourceSFX.clip == runningSound)
+            if ((audioSourceSFX.clip == walkingSound || audioSourceSFX.clip == runningSound) && audioSourceSFX.isPlaying == true)
                 audioSourceSFX.Stop();
         }
+        Debug.Log("Stop walking sound");
         
+    }
+
+    private void playJumpStartSound()
+    {
+        //audioSourceSFX.clip = jumpStartSound;
+        AudioSource.PlayClipAtPoint(jumpStartSound, transform.position, audioSourceSFX.volume);
+        
+        {
+            Debug.Log("playing jump start sound");
+        }
+    }
+
+    private void playJumpEndSound()
+    {
+        AudioSource.PlayClipAtPoint(jumpEndSound, transform.position, audioSourceSFX.volume);
+        {
+            Debug.Log("playing jump end sound");
+        }
+    }
+
+    private void playCaughtSound()
+    {
+        //audioSourceSFX.clip = jumpStartSound;
+        AudioSource.PlayClipAtPoint(caughtSound, transform.position, audioSourceSFX.volume);
+
+        {
+            Debug.Log("playing caught sound");
+        }
     }
 
     private void playButtonSound()
