@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
 		bool m_IsGrounded;
+		bool m_isJumpWithDirection;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
 		float m_TurnAmount;
@@ -29,6 +30,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
@@ -36,6 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
+			m_IsGrounded = true;
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
@@ -64,7 +67,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 			else
 			{
-				HandleAirborneMovement();
+				HandleAirborneMovement(move);
 			}
 
 			ScaleCapsuleForCrouching(crouch);
@@ -153,16 +156,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 
-		void HandleAirborneMovement()
+		void HandleAirborneMovement(Vector3 move)
 		{
 			// apply extra gravity from multiplier:
 			Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
+			Vector2 moveForce = new Vector2(move.x, move.z);
+			
+			if(m_isJumpWithDirection)
+				m_Rigidbody.AddForce(extraGravityForce);
 
+			else
+				m_Rigidbody.AddForce(extraGravityForce + (gameObject.transform.forward * moveForce.magnitude*1.5f) * m_Rigidbody.velocity.magnitude);
 
-			m_Rigidbody.AddForce(extraGravityForce + gameObject.transform.forward.normalized * m_Rigidbody.velocity.magnitude);
+			//m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
+			if(m_Rigidbody.velocity.y < 0)
+            {
+				m_GroundCheckDistance = m_OrigGroundCheckDistance;
 
-			m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
-			EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP_SFX);
+            }
+
+			else
+            {
+				m_GroundCheckDistance = 0.01f;
+            }
+
 
 		}
 
@@ -177,6 +194,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_IsGrounded = false;
 				m_Animator.applyRootMotion = false;
 				m_GroundCheckDistance = 0.1f;
+
+				Debug.Log(new Vector2(m_Rigidbody.velocity.x, m_Rigidbody.velocity.z).magnitude);
+				if (new Vector2(m_Rigidbody.velocity.x, m_Rigidbody.velocity.z).magnitude > 1)
+					m_isJumpWithDirection = true;
+				else
+					m_isJumpWithDirection = false;
+
+				EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP_SFX);
+				EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_JUMP_START_SFX);
 			}
 		}
 
@@ -215,8 +241,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
 			{
 				m_GroundNormal = hitInfo.normal;
-				m_IsGrounded = true;
 				m_Animator.applyRootMotion = true;
+
+				if(m_IsGrounded == false)
+                {
+					m_IsGrounded = true;
+					EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_JUMP_END_SFX);
+				}
+				
 			}
 			else
 			{

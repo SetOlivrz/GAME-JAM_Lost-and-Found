@@ -90,7 +90,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 #if !MOBILE_INPUT
             // walk speed multiplier
-            if (h != 0.0f || v != 0.0f)
+            if ((h != 0.0f || v != 0.0f) && m_Jump ==false)
             {
                 Parameters parameters = new Parameters();
 
