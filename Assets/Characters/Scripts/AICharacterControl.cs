@@ -108,6 +108,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 playerCaught = true;
                 agent.ResetPath();
                 gameObject.transform.LookAt(new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z));
+
+                EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAYER_WALK_STOP_SFX);
             }
         }
 
