@@ -97,12 +97,11 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 0.6f)
             {
-                //Debug.Log("You have been caught");
+                Debug.Log("You have been caught");
                 Vector3 NPCdirection = this.transform.position;
                 NPCdirection.y = player.transform.position.y;
                 player.transform.LookAt(NPCdirection);
                 StartCoroutine(reportPlayerCaught(2.5f));
-                // Time.timeScale = 0; // pause
                 playerCaught = true;
 
                 player.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl>().enabled = false;

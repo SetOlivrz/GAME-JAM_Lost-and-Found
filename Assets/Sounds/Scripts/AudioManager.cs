@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
 
     public void checkSFXToggle()
     {
-
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAY_BUTTON_SFX);
         if (sfxToggle.isOn == false)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.ON_STOP_ALL_SFX);
