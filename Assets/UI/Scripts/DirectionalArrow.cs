@@ -22,7 +22,7 @@ public class DirectionalArrow : MonoBehaviour
         targetPosition.y = this.transform.position.y;
         transform.LookAt(targetPosition);
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && Time.timeScale != 0)
         {
             bookMark.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.3f, this.transform.position.z);
         }
