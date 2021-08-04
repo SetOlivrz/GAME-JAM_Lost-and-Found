@@ -10,6 +10,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField] AudioClip jumpStartSound;
     [SerializeField] AudioClip jumpEndSound;
     [SerializeField] AudioClip caughtSound;
+    [SerializeField] AudioClip keypickupSound;
 
     [SerializeField] private AudioSource audioSourceSFX;
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_START_SFX, playJumpStartSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_END_SFX, playJumpEndSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, playCaughtSound  );
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_GET, playKeyGetSound);
 
 
         //ui button clicks
@@ -115,7 +117,13 @@ public class SFXManager : MonoBehaviour
     {
         audioSourceSFX.PlayOneShot(buttonSound);
     }
-    
+
+    private void playKeyGetSound()
+    {
+        AudioSource.PlayClipAtPoint(keypickupSound, transform.position, audioSourceSFX.volume);
+    }
+
+
     private void stopAllSounds()
     {
         if (audioSourceSFX != null)
