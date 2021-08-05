@@ -296,7 +296,6 @@ GameObject:
   - component: {fileID: 1360024604717404137}
   - component: {fileID: 8245058281180874764}
   - component: {fileID: 2522168586166198157}
-  - component: {fileID: 3198013942208482225}
   m_Layer: 6
   m_Name: HunterPatrol
   m_TagString: Untagged
@@ -521,26 +520,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3198013942208482225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360024604717404136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af8896ed666e344e8540dbf9d5e5c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSound: {fileID: 0}
-  runningSound: {fileID: 0}
-  buttonSound: {fileID: 0}
-  jumpStartSound: {fileID: 0}
-  jumpEndSound: {fileID: 0}
-  caughtSound: {fileID: 0}
-  keypickupSound: {fileID: 0}
-  audioSourceSFX: {fileID: 0}
 --- !u!1 &1991034542755830425
 GameObject:
   m_ObjectHideFlags: 0
