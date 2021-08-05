@@ -353,6 +353,10 @@ MonoBehaviour:
   walkingSound: {fileID: 0}
   runningSound: {fileID: 0}
   buttonSound: {fileID: 8300000, guid: 8a4f6dc628014034fb674a43895e2392, type: 3}
+  jumpStartSound: {fileID: 0}
+  jumpEndSound: {fileID: 0}
+  caughtSound: {fileID: 0}
+  keypickupSound: {fileID: 0}
   audioSourceSFX: {fileID: 507568667}
 --- !u!82 &507568663
 AudioSource:
@@ -709,7 +713,7 @@ RectTransform:
   m_GameObject: {fileID: 812946252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.73757, y: 0.73757, z: 0.73757}
   m_Children:
   - {fileID: 1782216271}
   m_Father: {fileID: 98356014}
@@ -717,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 311}
+  m_AnchoredPosition: {x: 0, y: 403}
   m_SizeDelta: {x: 906.709, y: 148.077}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &812946254
@@ -938,7 +942,7 @@ RectTransform:
   m_GameObject: {fileID: 1417786035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.73757, y: 0.73757, z: 0.73757}
   m_Children:
   - {fileID: 2018446362}
   m_Father: {fileID: 98356014}
@@ -946,7 +950,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 98.17999}
+  m_AnchoredPosition: {x: 0, y: 245}
   m_SizeDelta: {x: 906.709, y: 148.077}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1417786037
@@ -1153,14 +1157,14 @@ RectTransform:
   m_GameObject: {fileID: 1683048467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8647271, y: 0.8647271, z: 0.8647271}
   m_Children: []
   m_Father: {fileID: 98356014}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 477}
+  m_AnchoredPosition: {x: 0, y: 554}
   m_SizeDelta: {x: 1207.1531, y: -715.38916}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1683048469
@@ -1196,7 +1200,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GAME TITLE
+  m_Text: DREAMSCAPE
 --- !u!222 &1683048470
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1417,6 +1421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PausedUI: {fileID: 857734520}
   OptionsUI: {fileID: 857734520}
+  HelpUI: {fileID: 0}
   KeyUI: {fileID: 857734520}
 --- !u!1 &2018446361
 GameObject:
