@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    [SerializeField] AudioClip walkingSound;
-    [SerializeField] AudioClip runningSound;
-    [SerializeField] AudioClip buttonSound;
-    [SerializeField] AudioClip jumpStartSound;
-    [SerializeField] AudioClip jumpEndSound;
-    [SerializeField] AudioClip caughtSound;
-    [SerializeField] AudioClip keypickupSound;
+    [SerializeField] AudioClip walkingSound = null;
+    [SerializeField] AudioClip runningSound = null;
+    [SerializeField] AudioClip buttonSound = null;
+    [SerializeField] AudioClip jumpStartSound = null;
+    [SerializeField] AudioClip jumpEndSound = null;
+    [SerializeField] AudioClip caughtSound = null;
+    [SerializeField] AudioClip keypickupSound = null;
 
     [SerializeField] private AudioSource audioSourceSFX;
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class SFXManager : MonoBehaviour
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAY_BUTTON_SFX, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_SFX, stopAllSounds);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, resumeAllSounds);
 
     }
 
@@ -58,13 +59,16 @@ public class SFXManager : MonoBehaviour
     {
         bool isWalking = parameters.GetBoolExtra("isWalking", false);
 
-        if (isWalking)
-            audioSourceSFX.clip = walkingSound;
+        if (walkingSound != null)
+        {
+            if (isWalking)
+                audioSourceSFX.clip = walkingSound;
 
-        else
-            audioSourceSFX.clip = runningSound;
-        if (!audioSourceSFX.isPlaying)
-            audioSourceSFX.Play();
+            else
+                audioSourceSFX.clip = runningSound;
+            if (!audioSourceSFX.isPlaying)
+                audioSourceSFX.Play();
+        }
 
         //Debug.Log("play walking sound");
     }
@@ -112,7 +116,8 @@ public class SFXManager : MonoBehaviour
 
     private void playKeyGetSound()
     {
-        AudioSource.PlayClipAtPoint(keypickupSound, transform.position, audioSourceSFX.volume);
+        if(keypickupSound != null)
+            AudioSource.PlayClipAtPoint(keypickupSound, transform.position, audioSourceSFX.volume);
     }
 
 
@@ -124,5 +129,13 @@ public class SFXManager : MonoBehaviour
                 audioSourceSFX.Stop();
         }
         
+    }
+
+    private void resumeAllSounds()
+    {
+        if (audioSourceSFX != null)
+        {
+            audioSourceSFX.Play();
+        }
     }
 }
