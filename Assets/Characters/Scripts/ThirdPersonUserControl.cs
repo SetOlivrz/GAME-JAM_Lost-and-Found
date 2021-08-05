@@ -41,7 +41,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
-
+        private void OnDestroy()
+        {
+            EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
+        }
         private void Update()
         {
             
