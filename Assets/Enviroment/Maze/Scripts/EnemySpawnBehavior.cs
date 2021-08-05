@@ -24,8 +24,6 @@ public class EnemySpawnBehavior : MonoBehaviour
     {
         
         EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_HUNTERS, this.spawnHunters);
-        //nPatrolHunters = 10;
-        //nFollowHunters = 3;
     }
 
     private void OnDestroy()
