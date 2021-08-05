@@ -24,6 +24,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Start()
         {
+            EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, this.terminate);
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -43,7 +44,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, this.terminate);
+            
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
