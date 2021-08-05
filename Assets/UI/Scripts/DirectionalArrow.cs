@@ -12,7 +12,7 @@ public class DirectionalArrow : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        bookMark.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.3f, this.transform.position.z);
+        bookMark.transform.position = new Vector3(this.transform.position.x, -0.38f, this.transform.position.z);
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class DirectionalArrow : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && Time.timeScale != 0)
         {
-            bookMark.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.3f, this.transform.position.z);
+            bookMark.transform.position = new Vector3(this.transform.position.x, -0.38f, this.transform.position.z);
         }
     }
 }
