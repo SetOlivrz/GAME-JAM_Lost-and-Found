@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseStateController : MonoBehaviour
+public class CursorStateController : MonoBehaviour
 {
     [SerializeField] private GameObject PauseScreen;
     [SerializeField] private GameObject OptionsScreen;

@@ -34,12 +34,6 @@ public class SFXManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnDestroy()
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_SFX);
@@ -55,6 +49,13 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_STOP_ALL_SFX);
 
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     private void playWalkingSound(Parameters parameters)
     {
         bool isWalking = parameters.GetBoolExtra("isWalking", false);
