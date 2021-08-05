@@ -19,27 +19,17 @@ public class SFXManager : MonoBehaviour
         audioSourceSFX = this.gameObject.GetComponent<AudioSource>();
 
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_SFX, playWalkingSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP_SFX, stopWalkingSound);
+
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_START_SFX, playJumpStartSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_JUMP_END_SFX, playJumpEndSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, playCaughtSound  );
+
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, playCaughtSound);
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_KEY_GET, playKeyGetSound);
 
-
-        //ui button clicks
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_OPTIONS_MENU, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PAUSE_GAME, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_RESUME_GAME, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_TO_MENU, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_QUIT_GAME, playButtonSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_START_GAME, playButtonSound);
-
-
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_WALK_STOP_SFX, stopWalkingSound);
-        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_CAUGHT, stopWalkingSound);
-
+        EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAY_BUTTON_SFX, playButtonSound);
         EventBroadcaster.Instance.AddObserver(EventNames.ON_STOP_ALL_SFX, stopAllSounds);
-
-
 
     }
 
@@ -54,12 +44,14 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_SFX);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_STOP_SFX);
 
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_OPTIONS_MENU);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PAUSE_GAME);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_RESUME_GAME);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_TO_MENU);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_QUIT_GAME);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_START_GAME);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_JUMP_END_SFX);
+
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_KEY_GET);
+
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAY_BUTTON_SFX);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_STOP_ALL_SFX);
 
     }
     private void playWalkingSound(Parameters parameters)
