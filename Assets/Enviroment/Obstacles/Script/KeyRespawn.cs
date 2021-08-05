@@ -11,6 +11,7 @@ public class KeyRespawn : MonoBehaviour
     [SerializeField] GameObject KeyUI;
 
     // Start is called before the first frame update
+
     void Start()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.ON_PLAYER_RESPAWN, RespawnKeys);
@@ -24,7 +25,12 @@ public class KeyRespawn : MonoBehaviour
         GameObject Key = GameObject.Instantiate(KeyModel, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation, null);
 
     }
-    // Update is called once per frame
+
+    private void OnDestroy()
+    {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_RESPAWN);
+    }
+
     void Update()
     {
         
