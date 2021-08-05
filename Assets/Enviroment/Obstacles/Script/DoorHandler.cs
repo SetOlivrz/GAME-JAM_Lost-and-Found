@@ -12,6 +12,8 @@ public class DoorHandler : MonoBehaviour
     [SerializeField] AudioClip FakeDoorSound;
     [SerializeField] AudioClip TrueDoorSound;
 
+    [SerializeField] AudioClip WindSound;
+
     bool gameOver = false;
     bool antiEarBreaker = false;
     bool delayInProgress = false;
@@ -21,6 +23,8 @@ public class DoorHandler : MonoBehaviour
     {
         int i = Random.Range(0, 5);
         TrueDoor = DoorList[i];
+        TrueDoor.GetComponent<AudioSource>().clip = WindSound;
+        TrueDoor.GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class DoorHandler : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(TrueDoor.transform.position, player.transform.position) <= 0.4f && gameOver == false)
+        if (Vector3.Distance(TrueDoor.transform.position, player.transform.position) <= 0.4f && gameOver == false && KeyUI.GetComponent<Image>().color == Color.yellow)
         {
             AudioSource.PlayClipAtPoint(TrueDoorSound, TrueDoor.transform.position, 1);
             gameOver = true;
