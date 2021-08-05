@@ -39,6 +39,7 @@ public class SFXManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_SFX);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_WALK_STOP_SFX);
 
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_JUMP_START_SFX);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_JUMP_END_SFX);
 
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAYER_CAUGHT);
@@ -47,6 +48,7 @@ public class SFXManager : MonoBehaviour
 
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_PLAY_BUTTON_SFX);
         EventBroadcaster.Instance.RemoveObserver(EventNames.ON_STOP_ALL_SFX);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.ON_RESUME_GAME);
 
     }
 
