@@ -55,11 +55,13 @@ public class ButtonManager : MonoBehaviour
 
     public void OpenHelp()
     {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAY_BUTTON_SFX);
         EventBroadcaster.Instance.PostEvent(EventNames.ON_OPEN_HELP);
     }
 
     public void CloseHelp()
     {
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_PLAY_BUTTON_SFX);
         EventBroadcaster.Instance.PostEvent(EventNames.ON_CLOSE_HELP);
     }
 
