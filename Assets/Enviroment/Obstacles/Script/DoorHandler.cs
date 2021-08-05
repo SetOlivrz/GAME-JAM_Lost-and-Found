@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DoorHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] GameObject player;
     [SerializeField] GameObject[] DoorList;
     [SerializeField] GameObject TrueDoor;
     [SerializeField] GameObject KeyUI;

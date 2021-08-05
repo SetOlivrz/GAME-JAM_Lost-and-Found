@@ -91,7 +91,7 @@ public class ButtonFunctions : MonoBehaviour
     private void HasKey()
     {
         Debug.Log("Has Key");
-        KeyUI.GetComponent<Image>().color = Color.white;
+        KeyUI.GetComponent<Image>().color = Color.yellow;
     }
 
     private void LostKey()
